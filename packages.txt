@@ -1,0 +1,19 @@
+AppCleaner.pkg
+Proximity.pkg
+CheatSheet.pkg
+Cisco Webex Meetings.pkg
+Firefox.pkg
+GoogleChrome.pkg
+GoToMeeting.pkg
+MicrosoftEdge.pkg
+MicrosoftIntuneCompanyPortal.pkg
+MicrosoftOffice365Suite.pkg
+MicrosoftTeams.pkg
+MicrosoftOneDrive.pkg
+MicrosoftSkypeForBusiness365.pkg
+NoMAD.pkg
+Skim.pkg
+Spotify.pkg
+TeamViewerQuickSupport.pkg
+VLC.pkg
+Zoom.pkg
