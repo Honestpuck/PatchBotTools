@@ -18,7 +18,7 @@ import requests
 __all__ = ["PatchTeams"]
 
 # logging requirements
-LOGFILE = "PatchTeams.log"
+LOGFILE = "/usr/local/var/log/PatchTeams.log"
 LOGLEVEL = logging.DEBUG
 
 

@@ -18,11 +18,11 @@ import requests
 __all__ = ["Teams"]
 
 # logging requirements
-LOGFILE = 'ProdTeams.log'
+LOGFILE = "/usr/local/var/log/ProdTeams.log"
 LOGLEVEL = logging.DEBUG
 
 
-class Teams():
+class Teams:
     """When given the location of an output plist from Autopkg parses it
     and sends the details on packages productionized to Jamf Pro to Teams
     """
@@ -35,29 +35,25 @@ class Teams():
         try:
             self.plist = sys.argv[1]
         except IndexError:
-            self.plist = 'autopkg.plist'
+            self.plist = "autopkg.plist"
 
         # URL of Teams webhook
-        self.url = 'https://outlook.office.com/webhook/'
-        # token 
-        self.url += '76ea46bf-3dda-41f0-831d-b0dc655e4f97@43f93f8a-55a8-4263-bd84'
-        self.url += '-e03688a2ab2d/IncomingWebhook/0ac15911fcfa42deb'
-        self.url += '1d07f0672950542/63a48cfb-c3ef-4ee9-be63-fafbe4177f30'
+        self.url = "https://outlook.office.com/webhook/"
+        # token
+        self.url += "-e03688a2ab2d/IncomingWebhook/0ac15911fcfa42deb"
+        self.url += "1d07f0672950542/63a48cfb-c3ef-4ee9-be63-fafbe4177f30"
 
         # set up logging
-        now = datetime.datetime.now().strftime('%d/%m/%Y %H:%M')
+        now = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         frmt = "%(levelname)s {} %(message)s".format(now)
         # set up logging
-        logging.basicConfig(
-            filename=LOGFILE,
-            level=LOGLEVEL,
-            format=frmt
-        )
-        self.logger = logging.getLogger('')
+        logging.basicConfig(filename=LOGFILE, level=LOGLEVEL, format=frmt)
+        self.logger = logging.getLogger("")
         # set logging formatting
         # ch = logging.StreamHandler()
         ch = logging.handlers.TimedRotatingFileHandler(
-            LOGFILE, when='D', interval=7, backupCount=4)
+            LOGFILE, when="D", interval=7, backupCount=4
+        )
         ch.setFormatter(logging.Formatter(frmt))
         self.logger.addHandler(ch)
         self.logger.setLevel(LOGLEVEL)
@@ -123,33 +119,33 @@ class Teams():
         self.logger.info("Starting Run")
         sections = []
         empty = False
-        jsr = 'Production_summary_result'
+        jsr = "Production_summary_result"
         try:
-            fp = open(self.plist, 'rb')
+            fp = open(self.plist, "rb")
             pl = plistlib.load(fp)
         except IOError:
             self.logger.error("Failed to load %s", self.plist)
             sys.exit()
         item = 0
-        if jsr not in pl['summary_results']:
+        if jsr not in pl["summary_results"]:
             self.logger.debug("No Production results")
             empty = True
         else:
-            pkgs = pl['summary_results'][jsr]['data_rows']
+            pkgs = pl["summary_results"][jsr]["data_rows"]
             for p in pkgs:
                 sections.append(json.loads(self.section))
-                name = p['title']
-                version = p['version']
+                name = p["title"]
+                version = p["version"]
                 self.logger.debug("Version: %s Name: %s", version, name)
-                sections[item]['title'] = "**%s**" % name
-                sections[item]['text'] = version
+                sections[item]["title"] = "**%s**" % name
+                sections[item]["text"] = version
                 item = item + 1
             j = json.loads(self.template)
-            j['sections'] = sections
+            j["sections"] = sections
             d = json.dumps(j)
             requests.post(self.url, data=d)
         # do the error messages
-        fails = pl['failures']
+        fails = pl["failures"]
         if len(fails) == 0:  # no failures
             if empty:
                 requests.post(self.url, self.none_template)
@@ -158,11 +154,11 @@ class Teams():
         item = 0
         for f in fails:
             sections.append(json.loads(self.err_section))
-            sections[item]['title'] = "**%s**" % f['recipe']
-            sections[item]['text'] = f['message'].replace('\n', ' ')
+            sections[item]["title"] = "**%s**" % f["recipe"]
+            sections[item]["text"] = f["message"].replace("\n", " ")
             item = item + 1
         j = json.loads(self.err_template)
-        j['sections'] = sections
+        j["sections"] = sections
         d = json.dumps(j)
         requests.post(self.url, d)
 

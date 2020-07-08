@@ -1,7 +1,6 @@
 AppCleaner.pkg
 Proximity.pkg
 CheatSheet.pkg
-Cisco Webex Meetings.pkg
 Firefox.pkg
 GoogleChrome.pkg
 GoToMeeting.pkg
