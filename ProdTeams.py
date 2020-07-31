@@ -119,7 +119,7 @@ class Teams:
         self.logger.info("Starting Run")
         sections = []
         empty = False
-        jsr = "Production_summary_result"
+        jsr = "production_summary_result"
         try:
             fp = open(self.plist, "rb")
             pl = plistlib.load(fp)
