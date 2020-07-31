@@ -5,6 +5,7 @@
 
 # run the package build
 /usr/local/bin/autopkg run --recipe-list=/Users/"$(whoami)"/Documents/PatchBotTools/packages.txt \
+    --post com.honestpuck.PatchBot/JPCImporter \
     --report-plist=/Users/"$(whoami)"/Documents/JPCImporter.plist \
     -k FAIL_RECIPES_WITHOUT_TRUST_INFO=yes
 
