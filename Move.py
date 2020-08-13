@@ -118,7 +118,7 @@ class Move:
             report = path.expanduser("~/Documents/move.plist")
             command = ["./ProdTeams.py", report]
             self.logger.debug("command: " + " ".join(command))
-            subprocess.run(command, shell=True)
+            subprocess.run(command)
 
 
 if __name__ == "__main__":
