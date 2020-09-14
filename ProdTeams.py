@@ -134,7 +134,7 @@ class Teams:
             pkgs = pl["summary_results"][jsr]["data_rows"]
             for p in pkgs:
                 sections.append(json.loads(self.section))
-                name = p["title"]
+                name = p["package"]
                 version = p["version"]
                 self.logger.debug("Version: %s Name: %s", version, name)
                 sections[item]["title"] = "**%s**" % name
