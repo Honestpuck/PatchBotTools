@@ -4,20 +4,26 @@
 # v2.0 ARW 2020-03-19
 
 # run the package build
-/usr/local/bin/autopkg run --recipe-list=/Users/"$(whoami)"/Documents/PatchBotTools/packages.txt \
+/usr/local/bin/autopkg run --recipe-list=packages.txt \
+    --report-plist=JPCImporter.plist \
     --post com.honestpuck.PatchBot/JPCImporter \
-    --report-plist=/Users/"$(whoami)"/Documents/JPCImporter.plist \
     -k FAIL_RECIPES_WITHOUT_TRUST_INFO=yes
 
 # messages to MS Teams
-/Users/"$(whoami)"/Documents/PatchBotTools/Teams.py \
-    /Users/"$(whoami)"/Documents/JPCImporter.plist
+./Teams.py JPCImporter.plist
 
 # run the patch management
-/usr/local/bin/autopkg run --recipe-list=/Users/"$(whoami)"/Documents/PatchBotTools/patch.txt \
-    --report-plist=/Users/"$(whoami)"/Documents/PatchManager.plist \
+/usr/local/bin/autopkg run --recipe-list=patch.txt \
+    --report-plist=PatchManager.plist \
     -k FAIL_RECIPES_WITHOUT_TRUST_INFO=yes
 
 # messages to MS Teams
-/Users/"$(whoami)"/Documents/PatchBotTools/PatchTeams.py \
-    /Users/"$(whoami)"/Documents/PatchManager.plist
+./PatchTeams.py PatchManager.plist
+
+# run production shift
+/usr/local/bin/autopkg run --recipe-list=Production.txt \
+    --report-plist=Production.plist \
+    -k FAIL_RECIPES_WITHOUT_TRUST_INFO=yes
+
+# messages to MS Teams
+./ProdTeams.py Production.plist
