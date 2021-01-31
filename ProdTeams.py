@@ -41,7 +41,6 @@ class Teams:
         self.url = "https://outlook.office.com/webhook/"
         # token
         self.url += "-e03688a2ab2d/IncomingWebhook/0ac15911fcfa42deb"
-        self.url += "1d07f0672950542/63a48cfb-c3ef-4ee9-be63-fafbe4177f30"
 
         # set up logging
         now = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")

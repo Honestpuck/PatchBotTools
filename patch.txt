@@ -5,14 +5,3 @@ Firefox.ptch
 GoogleChrome.ptch
 GoToMeeting.ptch
 MicrosoftEdge.ptch
-MicrosoftIntuneCompanyPortal.ptch
-MicrosoftOffice365Suite.ptch
-MicrosoftTeams.ptch
-MicrosoftOneDrive.ptch
-MicrosoftSkypeForBusiness365.ptch
-NoMAD.ptch
-Skim.ptch
-Spotify.ptch
-TeamViewerQuickSupport.ptch
-VLC.ptch
-Zoom.ptch
